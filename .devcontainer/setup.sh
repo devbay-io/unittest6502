@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sudo apt update
-sudo apt install pre-commit -y
+sudo apt install pre-commit 64tass -y
 
 curl -sS https://starship.rs/install.sh -o /tmp/install.sh
 chmod +x /tmp/install.sh
