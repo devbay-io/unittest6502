@@ -2,7 +2,7 @@ package tass64
 
 import (
 	"bytes"
-	"errors"
+	"fmt"
 	"os/exec"
 )
 
@@ -21,18 +21,12 @@ func Run64tass(args ...string) (string, error) {
 
 	err := cmd.Run()
 	if err != nil {
-		return stderr.String(), err
+		return stderr.String(), fmt.Errorf("failed to run 64tass with args %v: %w", args, err)
 	}
 	return out.String(), nil
 }
 
 func Does64TassExist() bool {
-	cmd := exec.Command(TASS_EXECUTABLE)
-	err := cmd.Run()
-	if err != nil {
-		if errors.Is(err, exec.ErrNotFound) {
-			return false
-		}
-	}
-	return true
+	_, err := exec.LookPath(TASS_EXECUTABLE)
+	return err == nil
 }
